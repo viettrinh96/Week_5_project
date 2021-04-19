@@ -16,22 +16,21 @@ function App() {
   const [pageNum, setPageNum] = useState(1);
   const [sortBy, setSortBy] = useState(true);
   const [searchInput, setSearchInput] = useState(``);
-  const fetchData = async () => {
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNum}`;
-    console.log("url?", url);
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      console.log("yeahhh", data);
-      setItemList(data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+
   useEffect(() => {
-    console.log("ssss", sortBy);
+    const fetchData = async () => {
+      const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${pageNum}`;
+      console.log("url?", url);
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        setItemList(data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
     fetchData();
-  }, [pageNum, sortBy]);
+  }, [pageNum]);
 
   console.log(itemList);
   console.log(sortBy);
